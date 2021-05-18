@@ -228,7 +228,7 @@ class Cirestfulapiio extends RestController {
 		else
 		{
 			$this->Field_verify = $this->Simple_verify_factory->create_verify($value_4);
-			if ( ! $this->Field_verify->verify($this, $this->request_data[$value_0]))
+			if ( ! $this->Field_verify->verify($this->request_data[$value_0]))
 			{
 				$this->response(400, $value_4 . output_msg('form_35'));
 			}

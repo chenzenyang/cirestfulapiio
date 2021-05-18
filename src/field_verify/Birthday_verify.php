@@ -3,11 +3,11 @@ namespace chenzenyang\Cirestfulapiio\field_verify;
 
 use chenzenyang\Cirestfulapiio\field_verify\Field_verify_interface;
 
-class Email_verify implements Field_verify_interface {
+class Birthday_verify implements Field_verify_interface {
 
 	public function verify($value)
 	{
-		if ( ! filter_var($value, FILTER_VALIDATE_EMAIL))
+		if ( ! strtotime($value))
 		{
 			return FALSE;
 		}

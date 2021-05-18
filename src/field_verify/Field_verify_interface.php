@@ -3,5 +3,5 @@ namespace chenzenyang\Cirestfulapiio\field_verify;
 
 interface Field_verify_interface {
 
-	public function verify($obj, $value);
+	public function verify($value);
 }
