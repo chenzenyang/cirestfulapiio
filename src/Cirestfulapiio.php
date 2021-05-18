@@ -1,6 +1,6 @@
 <?php
 
-namespace joshua\Cirestfulapiio;
+namespace chenzenyang\Cirestfulapiio;
 
 use chriskacerguis\RestServer\RestController;
 

@@ -1,5 +1,5 @@
 {
-    "name": "joshua/cirestfulapiio",
+    "name": "chezenyang/cirestfulapiio",
     "description": "the package is easy to request&response api, base on php ci restfulapi",
     "type": "library",
     "require": {
@@ -7,14 +7,14 @@
     },
     "authors": [
         {
-            "name": "Joshua",
+            "name": "chenzenyang",
             "email": "chenzenyang0905@gmail.com"
         }
     ],
     "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
-            "Joshua\\Cirestfulapiio\\": "src/"
+            "chenzenyang\\Cirestfulapiio\\": "src/"
         }
     }
 }
