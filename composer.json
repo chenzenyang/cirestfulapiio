@@ -1,5 +1,5 @@
 {
-    "name": "chezenyang/cirestfulapiio",
+    "name": "chenzenyang/cirestfulapiio",
     "description": "the package is easy to request&response api, base on php ci restfulapi",
     "type": "library",
     "require": {
