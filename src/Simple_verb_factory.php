@@ -1,12 +1,13 @@
 <?php
+namespace chenzenyang\Cirestfulapiio;
 
-require_once 'verb_request/Bearer_request.php';
-require_once 'verb_request/Get_request.php';
-require_once 'verb_request/Post_request.php';
-require_once 'verb_request/Put_request.php';
-require_once 'verb_request/Del_request.php';
-require_once 'verb_request/Img_request.php';
-require_once 'verb_request/File_request.php';
+use chenzenyang\Cirestfulapiio\verb_request\Bearer_request;
+use chenzenyang\Cirestfulapiio\verb_request\Get_request;
+use chenzenyang\Cirestfulapiio\verb_request\Post_request;
+use chenzenyang\Cirestfulapiio\verb_request\Put_request;
+use chenzenyang\Cirestfulapiio\verb_request\Del_request;
+use chenzenyang\Cirestfulapiio\verb_request\Img_request;
+use chenzenyang\Cirestfulapiio\verb_request\File_request;
 
 class Simple_verb_factory {
 	

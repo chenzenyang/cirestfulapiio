@@ -1,6 +1,7 @@
 <?php
+namespace chenzenyang\Cirestfulapiio\verb_request;
 
-require_once 'Verb_request_interface.php';
+use chenzenyang\Cirestfulapiio\verb_request\Verb_request_interface;
 
 class Post_request implements Verb_request_interface {
 

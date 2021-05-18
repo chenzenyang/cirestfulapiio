@@ -1,5 +1,7 @@
 <?php
-require_once 'Field_verify_interface.php';
+namespace chenzenyang\Cirestfulapiio\field_verify;
+
+use chenzenyang\Cirestfulapiio\field_verify\Field_verify_interface;
 
 class Email_verify implements Field_verify_interface {
 

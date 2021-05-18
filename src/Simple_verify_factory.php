@@ -1,6 +1,7 @@
 <?php
+namespace chenzenyang\Cirestfulapiio;
 
-require_once 'field_verify/Email_verify.php';
+use chenzenyang\Cirestfulapiio\field_verify\Email_verify;
 
 class Simple_verify_factory {
 	

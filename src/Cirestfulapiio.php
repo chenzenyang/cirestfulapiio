@@ -1,11 +1,7 @@
 <?php
-
 namespace chenzenyang\Cirestfulapiio;
 
 use chriskacerguis\RestServer\RestController;
-
-require_once 'Simple_verb_factory.php';
-require_once 'Simple_verify_factory.php';
 
 class Cirestfulapiio extends RestController {
 
