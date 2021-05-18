@@ -1,5 +1,7 @@
 <?php
 
+namespace joshua\Cirestfulapiio;
+
 use chriskacerguis\RestServer\RestController;
 
 require_once 'Simple_verb_factory.php';
