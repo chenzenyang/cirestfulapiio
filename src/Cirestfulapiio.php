@@ -6,7 +6,7 @@ use chriskacerguis\RestServer\RestController;
 class Cirestfulapiio extends RestController {
 
 	public $request_data  = array();
-	public $response_data = array('status' => FALSE, 'message' => '');
+	public $response_data = array('code' => 400, 'status' => NULL, 'message' => '');
 	public $header_prefix = 'cirestfulapiio';
 	public object $token_obj;
 
@@ -77,52 +77,77 @@ class Cirestfulapiio extends RestController {
 	{
 		if ($msg != NULL)
 			$this->response_data['message'] = $msg;
-		
+
+		if ($code == NULL)
+			$code = $this->response_data['code'];
+
+		unset($this->response_data['code']);
+
 		if ( ! is_array($data))
 			$data = array();
 
-		if (empty($this->response_data['message']))
+		if (empty($this->response_data['message']) OR empty($this->response_data['status']))
 		{
 			$msg_flag = FALSE;
 			switch ($code)
 			{
 				case 200:
-					$data['status']  = TRUE;
+					$this->response_data['status']  = TRUE;
 					$msg_flag = TRUE;
+					break;
+
 				case 201:
-					$data['status']  = TRUE;
+					$this->response_data['status']  = TRUE;
 					$msg_flag = TRUE;
+					break;
+					
 				case 304:
-					$data['status']  = FALSE;
+					$this->response_data['status']  = FALSE;
 					$msg_flag = TRUE;
+					break;
+					
 				case 400:
-					$data['status']  = FALSE;
+					$this->response_data['status']  = FALSE;
 					$msg_flag = TRUE;
+					break;
+					
 				case 401:
-					$data['status']  = FALSE;
+					$this->response_data['status']  = FALSE;
 					$msg_flag = TRUE;
+					break;
+					
 				case 403:
-					$data['status']  = FALSE;
+					$this->response_data['status']  = FALSE;
 					$msg_flag = TRUE;
+					break;
+					
 				case 404:
-					$data['status']  = FALSE;
+					$this->response_data['status']  = FALSE;
 					$msg_flag = TRUE;
+					break;
+					
 				case 405:
-					$data['status']  = FALSE;
+					$this->response_data['status']  = FALSE;
 					$msg_flag = TRUE;
+					break;
+					
 				case 406:
-					$data['status']  = FALSE;
+					$this->response_data['status']  = FALSE;
 					$msg_flag = TRUE;
+					break;
+					
 				case 500:
-					$data['status']  = FALSE;
+					$this->response_data['status']  = FALSE;
 					$msg_flag = TRUE;
+					break;
+					
 					
 				default:
 					$data['status']  = $code;
 					break;
 			}
 
-			if ($msg_flag == TRUE)
+			if ($msg_flag == TRUE AND empty($this->response_data['message']))
 				$this->response_data['message'] = output_msg($code);
 		}
 
