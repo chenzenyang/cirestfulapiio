@@ -51,13 +51,13 @@ class Cirestfulapiio extends RestController {
 		foreach ($key_array as $key => $value)
 		{
 			// Stept 1 : 接收 value
-			$this->_receive_field($value[0], $value[5]);
+			$field_name = $this->_receive_field($value[0], $value[5]);
 
 			// Stept 2 : 確認欄位是否有預設值,若無則再確認是否必填
 			$this->_check_field($value[0], $value[1], $value[2]);
 
 			// Stept 3 : 驗證資料型態
-			$this->_verify_type($value[0], $value[3]);
+			$this->_verify_type($value[0], $value[3], $field_name);
 
 			// Stept 4 : 驗證表單欄位
 			if ($value[4] != FALSE AND is_string($value[4]))
@@ -173,6 +173,8 @@ class Cirestfulapiio extends RestController {
 		{
 			$this->another_data[$field_name] = $this->Verb_request->receive($this, $value_0);
 		}
+
+		return $field_name;
 	}
 
 	private function _check_field($value_0, $value_1, $value_2)
@@ -200,7 +202,7 @@ class Cirestfulapiio extends RestController {
 		}
 	}
 
-	private function _verify_type($value_0, $value_3)
+	private function _verify_type($value_0, $value_3, $field_name = '')
 	{
 		$type_flag = TRUE;
 
@@ -227,7 +229,32 @@ class Cirestfulapiio extends RestController {
 					if ( ! (is_string($this->request_data[$value_0]) AND
 						is_array(json_decode($this->request_data[$value_0], TRUE)) AND
 						((json_last_error() == JSON_ERROR_NONE) ? TRUE : FALSE)))
+					{
 						$type_flag = FALSE;
+					}
+					else
+					{
+						if (isset($this->another_data[$field_name]))
+						{
+							$this->another_data[$field_name] = json_decode($this->another_data[$field_name], TRUE);
+						}
+					}
+					break;
+
+				case 'JSON':
+					if ( ! (is_string($this->request_data[$value_0]) AND
+						is_array(json_decode($this->request_data[$value_0], TRUE)) AND
+						((json_last_error() == JSON_ERROR_NONE) ? TRUE : FALSE)))
+					{
+						$type_flag = FALSE;
+					}
+					else
+					{
+						if (isset($this->another_data[$field_name]))
+						{
+							$this->another_data[$field_name] = json_decode($this->another_data[$field_name]);
+						}
+					}
 					break;
 			}
 
