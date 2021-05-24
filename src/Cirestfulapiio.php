@@ -179,7 +179,7 @@ class Cirestfulapiio extends RestController {
 
 	private function _check_field($value_0, $value_1, $value_2)
 	{
-		if (empty($this->request_data[$value_0]) OR ( ! isset($this->request_data[$value_0])))
+		if ((empty($this->request_data[$value_0]) OR ( ! isset($this->request_data[$value_0]))) AND $this->request_data[$value_0] !== 0)
 		{
 			if ($value_1 !== FALSE)
 			{
@@ -197,6 +197,10 @@ class Cirestfulapiio extends RestController {
 					{
 						$this->response(400);
 					}
+				}
+				else
+				{
+					$this->response(400, $value_0 . ' is not empty!');
 				}
 			}
 		}
