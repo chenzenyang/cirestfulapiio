@@ -54,7 +54,7 @@ class Cirestfulapiio extends RestController {
 			$field_name = $this->_receive_field($value[0], $value[5]);
 
 			// Stept 2 : 確認欄位是否有預設值,若無則再確認是否必填
-			$this->_check_field($value[0], $value[1], $value[2]);
+			$this->_check_field($value[0], $value[1], $value[2], $value[5], $field_name);
 
 			// Stept 3 : 驗證資料型態
 			$this->_verify_type($value[0], $value[3], $field_name);
@@ -177,31 +177,32 @@ class Cirestfulapiio extends RestController {
 		return $field_name;
 	}
 
-	private function _check_field($value_0, $value_1, $value_2)
+	private function _check_field($value_0, $value_1, $value_2, $value_5, $field_name)
 	{
-		if ((empty($this->request_data[$value_0]) OR ( ! isset($this->request_data[$value_0]))) AND $this->request_data[$value_0] !== 0)
+		if (empty($this->request_data[$value_0]) OR ( ! isset($this->request_data[$value_0])))
 		{
+			// solution PHP ( 'any string' == 0 ) = TRUE problem.
+			if (is_numeric($this->request_data[$value_0]) AND $this->request_data[$value_0] == 0) return TRUE;
+
 			if ($value_1 !== FALSE)
 			{
 				$this->request_data[$value_0] = $value_1;
+
+				if (($value_5 === TRUE) OR (is_string($value_5) AND ( ! empty($value_5))))
+				{
+					$this->another_data[$field_name] = $value_1;
+				}
+				
+				return TRUE;
 			}
-			else
+
+			if ($value_2 === TRUE)
 			{
-				if (is_string($value_2) AND ( ! empty($value_2)))
-				{
-					if (empty($this->response_data['message']))
-					{
-						$this->response(400, $value_2);
-					}
-					else
-					{
-						$this->response(400);
-					}
-				}
-				else
-				{
-					$this->response(400, $value_0 . ' is not empty!');
-				}
+				$this->response(400, $value_0 . ' is not empty!');
+			}
+			elseif (is_string($value_2) AND ( ! empty($value_2)))
+			{
+				$this->response(400, $value_2);
 			}
 		}
 	}
@@ -212,6 +213,9 @@ class Cirestfulapiio extends RestController {
 
 		if (gettype($value_3) == 'string')
 		{
+			if (empty($this->request_data[$value_0]) AND $this->request_data[$value_0] !== 0)
+				return TRUE;
+			
 			switch ($value_3)
 			{
 				case 'string':
